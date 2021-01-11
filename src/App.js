@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { MeshDisplay } from './MeshDisplay';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.<br/>
-	  <span>TEST</span>
+	  <MeshDisplay position={[-1.2, 0, 0]} />
         </p>
         <a
           className="App-link"
