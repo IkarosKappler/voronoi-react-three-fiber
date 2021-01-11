@@ -1,0 +1,32 @@
+{
+  "name": "voronoi3d",
+  "version": "0.0.1",
+  "description": "My first react-app using react-three-fiber",
+  "main": "index.js",
+  "scripts": {
+    "compile-typescript": "tsc",
+    "build": "npm run compile-typescript && npm run webpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "npx webpack --mode production --config ./webpack5.config.js",
+    "tslint": "npx eslint ./src/ts/"
+  },
+  "keywords": [
+    "voronoi",
+    "react",
+    "three",
+    "react-three-fiber",
+    "javascript",
+    "3d"
+  ],
+  "author": "Ikaros Kappler",
+  "license": "MIT",
+  "dependencies": {
+    "react-scripts": "4.0.1",
+    "cra-template": "1.1.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "create-react-app": "^4.0.1"
+  }
+}
