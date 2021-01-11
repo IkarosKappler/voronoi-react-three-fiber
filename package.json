@@ -1,32 +1,38 @@
 {
   "name": "voronoi3d",
-  "version": "0.0.1",
-  "description": "My first react-app using react-three-fiber",
-  "main": "index.js",
-  "scripts": {
-    "compile-typescript": "tsc",
-    "build": "npm run compile-typescript && npm run webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "npx webpack --mode production --config ./webpack5.config.js",
-    "tslint": "npx eslint ./src/ts/"
-  },
-  "keywords": [
-    "voronoi",
-    "react",
-    "three",
-    "react-three-fiber",
-    "javascript",
-    "3d"
-  ],
-  "author": "Ikaros Kappler",
-  "license": "MIT",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
-    "cra-template": "1.1.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "web-vitals": "^0.2.4"
   },
-  "devDependencies": {
-    "create-react-app": "^4.0.1"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
