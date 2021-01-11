@@ -47,16 +47,17 @@ export class VoronoiGeometry extends Geometry {
 		for( var v in voronoiDiagram ) {
 			var cell : VoronoiCell = voronoiDiagram[v];
 			var polygon = cell.toPolygon();
-			polygon.scale( options.voronoiCellScale, (cell as unknown).sharedVertex );
+			// TODO: sharedVertex should not be private
+			polygon.scale( options.voronoiCellScale, (cell as any).sharedVertex );
 
 			// Create a cell
 			var bottomVertexIndices = [];
 			var topVertexIndices = [];
 			for( var i in polygon.vertices ) {
-			bottomVertexIndices.push( this.vertices.length );	
-			this.vertices.push( new Vector3( polygon.vertices[i].x, polygon.vertices[i].y, 0 ) );
-			topVertexIndices.push( this.vertices.length );
-			this.vertices.push( new Vector3( polygon.vertices[i].x, polygon.vertices[i].y, 16 ) ); // Height
+				bottomVertexIndices.push( this.vertices.length );	
+				this.vertices.push( new Vector3( polygon.vertices[i].x, polygon.vertices[i].y, 0 ) );
+				topVertexIndices.push( this.vertices.length );
+				this.vertices.push( new Vector3( polygon.vertices[i].x, polygon.vertices[i].y, 16 ) ); // Height
 			}
 
 			this.voronoiCellIndices.push( { bottomVertexIndices : bottomVertexIndices, topVertexIndices : topVertexIndices } );

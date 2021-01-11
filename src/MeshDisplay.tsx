@@ -4,7 +4,6 @@ import { delaunay2voronoi } from 'plotboilerplate/src/js/utils/algorithms/delaun
 import { VoronoiCell } from 'plotboilerplate/src/js/utils/datastructures/VoronoiCell';
 import { Vertex } from 'plotboilerplate/src/js/Vertex';
 import React, { useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Canvas, MeshProps, useFrame } from 'react-three-fiber';
 import { Face3, Vector3 } from 'three';
 
@@ -26,8 +25,8 @@ const VoronoiMesh : React.FC<VoronoiMeshProps> = (props) => {
   // const vertices = React.useMemo(() => cubeVertices.map(v => new THREE.Vector3(...v)), [])
   // const faces = React.useMemo(() => cubeFaces.map(f => new THREE.Face3(...f)), [])
 
-  const vertices = React.useMemo(() => voronoiGeometry.vertices.map(v => new Vector3(v.x,v.y,v.z)), [])
-  const faces = React.useMemo(() => voronoiGeometry.faces.map(f => new Face3(f.a,f.b,f.c)), [])
+  const vertices = React.useMemo(() => voronoiGeometry.vertices.map(v => new Vector3(v.x,v.y,v.z)), [voronoiGeometry.vertices])
+  const faces = React.useMemo(() => voronoiGeometry.faces.map(f => new Face3(f.a,f.b,f.c)), [voronoiGeometry.faces])
 
 
   return (
@@ -39,6 +38,7 @@ const VoronoiMesh : React.FC<VoronoiMeshProps> = (props) => {
   
 };
 
+/*
 const MyMesh: React.FC<MeshProps> = (props) => {
   // This reference will give us direct access to the mesh
   const mesh = useRef<Mesh>()
@@ -64,7 +64,7 @@ const MyMesh: React.FC<MeshProps> = (props) => {
         <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
-}
+} */
 
 
 export const MeshDisplay: React.FC<MeshProps> = (props) => {
@@ -82,13 +82,11 @@ export const MeshDisplay: React.FC<MeshProps> = (props) => {
      }
      const delau : Delaunay = new Delaunay( pointList );
      const triangles : Array<Triangle>  = delau.triangulate();
-     // trianglesPointCount = pointList.length;
-     // voronoiDiagram = [];
 
      var voronoiBuilder : delaunay2voronoi = new delaunay2voronoi(pointList,triangles);
      const diagram : Array<VoronoiCell> = voronoiBuilder.build();
      setVoronoiDiagram( diagram );
-  } );
+  }, [setVoronoiDiagram] );
 
   return (
   <Canvas>
