@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Demo: writing my first three-react-fiber app with typescript
+
+[Screenshot](screenshot.png "Screenshot")
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
