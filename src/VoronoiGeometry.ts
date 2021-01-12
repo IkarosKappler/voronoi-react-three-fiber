@@ -57,7 +57,7 @@ export class VoronoiGeometry extends Geometry {
 				bottomVertexIndices.push( this.vertices.length );	
 				this.vertices.push( new Vector3( polygon.vertices[i].x, polygon.vertices[i].y, 0 ) );
 				topVertexIndices.push( this.vertices.length );
-				this.vertices.push( new Vector3( polygon.vertices[i].x, polygon.vertices[i].y, 16 ) ); // Height
+				this.vertices.push( new Vector3( polygon.vertices[i].x, polygon.vertices[i].y, 0.1 ) ); // Height 
 			}
 
 			this.voronoiCellIndices.push( { bottomVertexIndices : bottomVertexIndices, topVertexIndices : topVertexIndices } );

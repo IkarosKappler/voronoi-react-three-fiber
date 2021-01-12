@@ -4,13 +4,29 @@ import { delaunay2voronoi } from 'plotboilerplate/src/js/utils/algorithms/delaun
 import { VoronoiCell } from 'plotboilerplate/src/js/utils/datastructures/VoronoiCell';
 import { Vertex } from 'plotboilerplate/src/js/Vertex';
 import React, { useRef, useState } from 'react';
-import { Canvas, MeshProps, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
+import { Canvas, extend, MeshProps, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
 import { Face3, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import { VoronoiGeometry } from './VoronoiGeometry';
 
 import type { Mesh } from 'three';
+
+
+// https://www.gitmemory.com/issue/drcmda/react-three-fiber/130/504994917
+declare module JSX{
+  interface IntrinsicElements{
+      "group": any,
+      "geometry": any,
+      "lineBasicMaterial": any,
+      "mesh": any,
+      "octahedronGeometry": any,
+      "meshBasicMaterial": any,
+      "orbitControls": any, //I added this
+      "primitive": any, //I added this
+      "ambientLight": any //I added this
+  }
+}
 
 // https://spectrum.chat/react-three-fiber/general/property-orbitcontrols-does-not-exist-on-type-jsx-intrinsicelements~44712e68-4601-4486-b4b4-5e112f3dc09e
 declare global {
@@ -20,6 +36,22 @@ declare global {
     }
   }
 }
+
+
+extend({ OrbitControls })
+
+
+// interface IntrinsicElements{
+//   "group": any,
+//   "geometry": any,
+//   "lineBasicMaterial": any,
+//   "mesh": any,
+//   "octahedronGeometry": any,
+//   "meshBasicMaterial": any,
+//   "orbitControls": any, //I added this
+//   "primitive": any, //I added this
+//   "ambientLight": any //I added this
+// }
 
 
 interface VoronoiMeshProps extends MeshProps {
@@ -33,13 +65,6 @@ const VoronoiMesh : React.FC<VoronoiMeshProps> = (props) => {
   const voronoiGeometry : VoronoiGeometry = new VoronoiGeometry( props );
   const vertices = React.useMemo(() => voronoiGeometry.vertices.map(v => new Vector3(v.x,v.y,v.z)), [voronoiGeometry.vertices])
   const faces = React.useMemo(() => voronoiGeometry.faces.map(f => new Face3(f.a,f.b,f.c)), [voronoiGeometry.faces])
-
-  // const {
-  //   camera,
-  //   gl: { domElement }
-  // } = useThree();
-
-  // <orbitControls args={[camera, domElement]} />
 
   return (
     <mesh ref={ref}>
@@ -89,6 +114,7 @@ const Scene : React.FC<VoronoiMeshProps> = (props) => {
       <pointLight position={[10, 10, 10]} />
       <VoronoiMesh 
         position={[0,0,0]} 
+        scale={[1,1,1]}
         voronoiDiagram={props.voronoiDiagram} 
         voronoiCellScale={props.voronoiCellScale} />
       <orbitControls args={[camera, domElement]} />
@@ -107,8 +133,9 @@ export const MeshDisplay: React.FC<MeshProps> = (props) => {
   React.useEffect( () => {
      const pointList : Vertex[] = [];
      for( var i = 0; i < 32; i++ ) {
-        pointList.push( new Vertex( Math.random()*width,
-  		      	      Math.random()*height) );
+        pointList.push( new Vertex( Math.random(), // *width,
+                    Math.random() // *height) 
+        ));
      }
      const delau : Delaunay = new Delaunay( pointList );
      const triangles : Array<Triangle>  = delau.triangulate();
@@ -123,13 +150,13 @@ export const MeshDisplay: React.FC<MeshProps> = (props) => {
 
   return (
     <Canvas>
-      {/* <Scene voronoiDiagram={voronoiDiagram} voronoiCellScale={0.8} /> */}
-      <ambientLight />
+      <Scene voronoiDiagram={voronoiDiagram} voronoiCellScale={0.8} />
+      {/* <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <VoronoiMesh 
         position={[0,0,0]} 
         voronoiDiagram={voronoiDiagram} 
-        voronoiCellScale={voronoiCellScale} />
+        voronoiCellScale={voronoiCellScale} /> */}
     </Canvas>
 
   )
