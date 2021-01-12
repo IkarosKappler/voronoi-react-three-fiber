@@ -1,6 +1,6 @@
 # Demo: writing my first three-react-fiber app with typescript
 
-[Screenshot](screenshot.png "Screenshot")
+![Screenshot](screenshot.png "Screenshot")
 
 
 ## Getting Started with Create React App
