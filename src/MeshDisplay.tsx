@@ -62,12 +62,14 @@ interface VoronoiMeshProps extends MeshProps {
 const VoronoiMesh : React.FC<VoronoiMeshProps> = (props) => {
 
   const ref = useRef<Mesh>()
+
   const voronoiGeometry : VoronoiGeometry = new VoronoiGeometry( props );
-  const vertices = React.useMemo(() => voronoiGeometry.vertices.map(v => new Vector3(v.x,v.y,v.z)), [voronoiGeometry.vertices])
-  const faces = React.useMemo(() => voronoiGeometry.faces.map(f => new Face3(f.a,f.b,f.c)), [voronoiGeometry.faces])
+  const vertices : Array<Vector3> = React.useMemo(() => voronoiGeometry.vertices.map(v => new Vector3(v.x,v.y,v.z)), [voronoiGeometry.vertices])
+  const faces : Array<Face3> = React.useMemo(() => voronoiGeometry.faces.map(f => new Face3(f.a,f.b,f.c)), [voronoiGeometry.faces])
 
   return (
-    <mesh ref={ref}>
+    <mesh 
+      ref={ref}>
       <geometry attach="geometry" vertices={vertices} faces={faces} onUpdate={self => self.computeFaceNormals()} />
       <meshStandardMaterial color={'orange'} side={DoubleSide} />
     </mesh>
