@@ -5,7 +5,7 @@ import { VoronoiCell } from 'plotboilerplate/src/js/utils/datastructures/Voronoi
 import { Vertex } from 'plotboilerplate/src/js/Vertex';
 import React, { useRef, useState } from 'react';
 import { Canvas, extend, MeshProps, ReactThreeFiber, useFrame, useThree } from 'react-three-fiber';
-import { Face3, Vector3 } from 'three';
+import { DoubleSide, Face3, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import { VoronoiGeometry } from './VoronoiGeometry';
@@ -69,7 +69,7 @@ const VoronoiMesh : React.FC<VoronoiMeshProps> = (props) => {
   return (
     <mesh ref={ref}>
       <geometry attach="geometry" vertices={vertices} faces={faces} onUpdate={self => self.computeFaceNormals()} />
-      <meshStandardMaterial color={'orange'} />
+      <meshStandardMaterial color={'orange'} side={DoubleSide} />
     </mesh>
   )
   

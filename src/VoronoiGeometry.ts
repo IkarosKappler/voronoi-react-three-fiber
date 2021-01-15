@@ -71,22 +71,23 @@ export class VoronoiGeometry extends Geometry {
 			var cell = this.voronoiCellIndices[c];
 			var n = cell.bottomVertexIndices.length;
 			for( var i = 0; i < n; i++) {
-			// Fill sides 
-			this.faces.push( new Face3( cell.bottomVertexIndices[i],
-							cell.bottomVertexIndices[(i+1)%n],
-							cell.topVertexIndices[i] ) );
-			this.faces.push( new Face3( cell.bottomVertexIndices[(i+1)%n],
-							cell.topVertexIndices[i],
-							cell.topVertexIndices[(i+1)%n]
-							) );
-			// Fill top and bottom area
-			this.faces.push( new Face3( cell.bottomVertexIndices[0],
-							cell.bottomVertexIndices[i],
-							cell.bottomVertexIndices[(i+1)%n] ) );
-			this.faces.push( new Face3( cell.topVertexIndices[0],
-							cell.topVertexIndices[i],
-							cell.topVertexIndices[(i+1)%n] ) );
-			}
+				// Fill sides 
+				this.faces.push( new Face3( cell.bottomVertexIndices[i],
+								cell.bottomVertexIndices[(i+1)%n],
+								cell.topVertexIndices[i] ) );
+				this.faces.push( new Face3( cell.bottomVertexIndices[(i+1)%n],
+								cell.topVertexIndices[(i+1)%n],
+								cell.topVertexIndices[i]
+								) );
+				// Fill top and bottom area
+				this.faces.push( new Face3( cell.bottomVertexIndices[0],
+								cell.bottomVertexIndices[i],
+								cell.bottomVertexIndices[(i+1)%n] ) );
+				this.faces.push( new Face3( cell.topVertexIndices[0],
+								cell.topVertexIndices[(i+1)%n] ,
+								cell.topVertexIndices[i] 
+								) );
+				}
 		}	
     };
 
